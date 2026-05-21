@@ -1,49 +1,77 @@
 
-def determinant(matrix):
+
+def inverse(matrix):
+
+    rows = len(matrix)
+    cols = len(matrix[0])
+
     m = [row[:] for row in matrix]
 
-    n = len(m)
-    swaps = 0
+    I = [[1 if i == j else 0 for j in range(rows)]
+         for i in range(rows)]
 
-    for col in range(n):
+    pivot_row = 0
 
-        # Find pivot
-        pivot = col
+    for col in range(cols):
 
-        while pivot < n and m[pivot][col] == 0:
+        if pivot_row >= rows:
+            break
+
+        pivot = pivot_row
+
+        while pivot < rows and m[pivot][col] == 0:
             pivot += 1
 
-        # No pivot => determinant = 0
-        if pivot == n:
-            return 0
+        if pivot == rows:
+            continue
 
-        # Swap rows
-        if pivot != col:
-            m[col], m[pivot] = m[pivot], m[col]
-            swaps += 1
+        m[pivot_row], m[pivot] = m[pivot], m[pivot_row]
+        I[pivot_row], I[pivot] = I[pivot], I[pivot_row]
 
-        # Eliminate rows below
-        for row in range(col + 1, n):
+        pivot_value = m[pivot_row][col]
 
-            factor = m[row][col] / m[col][col]
+        for j in range(cols):
+            m[pivot_row][j] /= pivot_value
+            I[pivot_row][j] /= pivot_value
 
-            for j in range(col, n):
-                m[row][j] -= factor * m[col][j]
+        for i in range(rows):
 
-    # Product of diagonal
-    det = 1
+            if i != pivot_row:
 
-    for i in range(n):
-        det *= m[i][i]
+                factor = m[i][col]
 
-    # Adjust sign
-    if swaps % 2 == 1:
-        det *= -1
+                for j in range(cols):
+                    m[i][j] -= factor * m[pivot_row][j]
+                    I[i][j] -= factor * I[pivot_row][j]
 
-    return det
+        pivot_row += 1
+
+    return I
 
 
 if __name__ == "__main__":
-    m = [[1, 2, 3], [5, 6, 9], [6, 3, 8],]
-    m = (m)
+    m = [
+        [1., 0., 0.],
+        [0., 1., 0.],
+        [0., 0., 1.],
+    ]
+    m = inverse(m)
+    print(m)
+
+    m = [
+        [2., 0., 0.],
+        [0., 2., 0.],
+        [0., 0., 2.],
+    ]
+    
+    m = inverse(m)
+    print(m)
+
+    m = [
+        [8., 5., -2.],
+        [4., 7., 20.],
+        [7., 6., 1.],
+    ]
+
+    m = inverse(m)
     print(m)

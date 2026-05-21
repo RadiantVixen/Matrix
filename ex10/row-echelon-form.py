@@ -1,57 +1,58 @@
 
+class Matrix:
+    def __init__(self, data):
+        self.data = [list(map(float, row)) for row in data]
 
-def row_echelon(matrix):
-    m = [row[:] for row in matrix]
 
-    rows = len(m)
-    cols = len(m[0])
+    def row_echelon(matrix):
+        m = [row[:] for row in matrix]
 
-    pivot_row = 0
+        rows = len(m)
+        cols = len(m[0])
 
-    for col in range(cols):
+        pivot_row = 0
 
-        if pivot_row >= rows:
-            break
+        for col in range(cols):
 
-        # Find non-zero pivot
-        pivot = pivot_row
+            if pivot_row >= rows:
+                break
 
-        while pivot < rows and m[pivot][col] == 0:
-            pivot += 1
+            pivot = pivot_row
 
-        if pivot == rows:
-            continue
+            while pivot < rows and m[pivot][col] == 0:
+                pivot += 1
 
-        # Swap rows
-        m[pivot_row], m[pivot] = m[pivot], m[pivot_row]
+            if pivot == rows:
+                continue
 
-        # Normalize pivot row
-        pivot_value = m[pivot_row][col]
 
-        for j in range(cols):
-            m[pivot_row][j] /= pivot_value
+            m[pivot_row], m[pivot] = m[pivot], m[pivot_row]
 
-        # Eliminate other rows
-        # print(m)
-        for i in range(rows):
 
-            if i != pivot_row:
+            pivot_value = m[pivot_row][col]
 
-                factor = m[i][col]
+            for j in range(cols):
+                m[pivot_row][j] /= pivot_value
 
-                for j in range(cols):
-                    m[i][j] -= factor * m[pivot_row][j]
 
-        pivot_row += 1
+            for i in range(rows):
 
-        # print(m)
-    return m
+                if i != pivot_row:
+
+                    factor = m[i][col]
+
+                    for j in range(cols):
+                        m[i][j] -= factor * m[pivot_row][j]
+
+            pivot_row += 1
+
+        return m
 
 
 
 
 if __name__ == "__main__":
     m = [[1, 2, 3], [5, 6, 9], [6, 3, 8],]
-    m = row_echelon(m)
+    m = m.row_echelon()
     print(m)
 
