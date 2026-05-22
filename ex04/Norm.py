@@ -1,33 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
+from ex03.DotProduct import Vector
 
-
-import math
-
-
-class Vector:
-    def __init__(self, data):
-        self.data = list(data)
-
-    def add(self, v):
-        for i in range(len(self.data)):
-            self.data[i] += v.data[i]
-
-    def sub(self, v):
-        for i in range(len(self.data)):
-            self.data[i] -= v.data[i]
-
-    def scl(self, a):
-        for i in range(len(self.data)):
-            self.data[i] *= a
-
-
-    def dot(self, v):
-        result = 0
-
-        for i in range(len(self.data)):
-            result += self.data[i] * v.data[i]
-
-        return result
+class Vector(Vector):
 
     def norm_1(self):
         s = 0
@@ -41,9 +18,9 @@ class Vector:
         s = 0
 
         for x in self.data:
-            s += x * x
+            s += x ** 2
 
-        return math.sqrt(s)
+        return s ** 0.5
 
     def norm_inf(self):
         m = 0
@@ -54,12 +31,15 @@ class Vector:
         return m
     
 if __name__ == "__main__":
-    v1 = Vector([1, 2, 3])
-    v2 = Vector([4, 5, 6])
+    u = Vector([0., 0., 0.])
+    print(f"{u.norm_1()}, {u.norm()}, {u.norm_inf()}")
+    # 0.0, 0.0, 0.0
 
-    result = v1.dot(v2)
-    print(result)  # Output: 32
-    v1.norm_1()
-    print(v1.norm_1())  # Output: 6
-    print(v1.norm())  # Output: 3.7416573867739413
-    print(v1.norm_inf())  # Output: 3   
+    u = Vector([1., 2., 3.])
+    print(f"{u.norm_1()}, {u.norm()}, {u.norm_inf()}")
+    # 6.0, 3.7416573867739413, 3.0
+
+    u = Vector([-1., -2.])
+    print(f"{u.norm_1()}, {u.norm()}, {u.norm_inf()}")
+    # 3.0, 2.23606797749979, 2.0
+

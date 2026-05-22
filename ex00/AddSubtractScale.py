@@ -1,3 +1,4 @@
+
 class Vector:
     def __init__(self, data):
         self.data = list(data)
@@ -13,6 +14,22 @@ class Vector:
     def scl(self, a):
         for i in range(len(self.data)):
             self.data[i] *= a
+    
+    def __add__(self, other):
+        return Vector([
+            self.data[i] + other.data[i]
+            for i in range(len(self.data))
+        ])
+
+    def __mul__(self, scalar):
+        return Vector([
+            x * scalar
+            for x in self.data
+        ])
+
+    def __rmul__(self, scalar):
+        return self.__mul__(scalar)
+            
 
 class Matrix:
     def __init__(self, data):
@@ -32,6 +49,29 @@ class Matrix:
         for i in range(len(self.data)):
             for j in range(len(self.data[0])):
                 self.data[i][j] *= a
+
+    
+    def __add__(self, other):
+        return Matrix([
+            [self.data[i][j] + other.data[i][j] for j in range(len(self.data[0]))]
+            for i in range(len(self.data))
+        ])
+
+    def __sub__(self, other):
+        return Matrix([
+            [self.data[i][j] - other.data[i][j] for j in range(len(self.data[0]))]
+            for i in range(len(self.data))
+        ])
+
+    def __mul__(self, scalar):
+        return Matrix([
+            [self.data[i][j] * scalar for j in range(len(self.data[0]))]
+            for i in range(len(self.data))
+        ])
+
+    def __rmul__(self, scalar):
+        return self.__mul__(scalar)
+
 
 
 if __name__ == "__main__":

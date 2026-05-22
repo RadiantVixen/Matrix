@@ -1,23 +1,12 @@
-from ex00.AddSubtractScale import Vector
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-class Matrix:
-    def __init__(self, data):
-        self.data = [list(row) for row in data]
+from ex04.Norm import Vector
+from ex07.LinearMap import Matrix
 
-    def add(self, m):
-        for i in range(len(self.data)):
-            for j in range(len(self.data[0])):
-                self.data[i][j] += m.data[i][j]
 
-    def sub(self, m):
-        for i in range(len(self.data)):
-            for j in range(len(self.data[0])):
-                self.data[i][j] -= m.data[i][j]
-
-    def scl(self, a):
-        for i in range(len(self.data)):
-            for j in range(len(self.data[0])):
-                self.data[i][j] *= a
+class Matrix(Matrix):
     
     def trace(self):
         if len(self.data) != len(self.data[0]):
@@ -31,8 +20,25 @@ class Matrix:
 
 
 if __name__ == "__main__":
-    m1 = Matrix([[1, 2], [3, 4]])
-    print(m1.trace())
+    u = Matrix([
+        [1., 0.],
+        [0., 1.]
+    ])
+    print(u.trace())
+    # 2.0
 
-    m2 = Matrix([[5, 6, 7], [8, 9, 10], [11, 12, 13]])
-    print(m2.trace())
+    u = Matrix([
+        [2., -5., 0.],
+        [4., 3., 7.],
+        [-2., 3., 4.]
+    ])
+    print(u.trace())
+    # 9.0
+
+    u = Matrix([
+        [-2., -8., 4.],
+        [1., -23., 4.],
+        [0., 6., 4.]
+    ])
+    print(u.trace())
+    # -21.0

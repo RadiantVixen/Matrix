@@ -1,23 +1,12 @@
-from ex00.AddSubtractScale import Vector
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-class Matrix:
-    def __init__(self, data):
-        self.data = [list(row) for row in data]
+from ex04.Norm import Vector
+from ex00.AddSubtractScale import Matrix
 
-    def add(self, m):
-        for i in range(len(self.data)):
-            for j in range(len(self.data[0])):
-                self.data[i][j] += m.data[i][j]
 
-    def sub(self, m):
-        for i in range(len(self.data)):
-            for j in range(len(self.data[0])):
-                self.data[i][j] -= m.data[i][j]
-
-    def scl(self, a):
-        for i in range(len(self.data)):
-            for j in range(len(self.data[0])):
-                self.data[i][j] *= a
+class Matrix(Matrix):
     
     def mul_vec(self, v):
         if len(self.data[0]) != len(v.data):
@@ -30,6 +19,7 @@ class Matrix:
                 result_data[i] += self.data[i][j] * v.data[j]
 
         return Vector(result_data)
+        
     def mul_mat(self, m):
         if len(self.data[0]) != len(m.data):
             raise ValueError("Matrix A column count must match Matrix B row count.")
@@ -45,12 +35,59 @@ class Matrix:
 
 
 if __name__ == "__main__":
-    m1 = Matrix([[1, 2], [3, 4]])
-    m2 = Matrix([[5, 6], [7, 8]])
+    u = Matrix([
+        [1., 0.],
+        [0., 1.]
+    ])
+    v = Vector([4., 2.])
+    print(u.mul_vec(v).data)
+    # [4.0, 2.0]
 
-    result_mat = m1.mul_mat(m2)
-    print(result_mat.data)  # Output: [[19, 22], [43, 50]]
+    u = Matrix([
+        [2., 0.],
+        [0., 2.]
+    ])
+    v = Vector([4., 2.])
+    print(u.mul_vec(v).data)
+    # [8.0, 4.0]
 
-    v = Vector([1, 2])
-    result_vec = m1.mul_vec(v)
-    print(result_vec.data)  # Output: [5, 11]
+    u = Matrix([
+        [2., -2.],
+        [-2., 2.]
+    ])
+    v = Vector([4., 2.])
+    print(u.mul_vec(v).data)
+    # [4.0, -4.0]
+
+    u = Matrix([
+        [1., 0.],
+        [0., 1.]
+    ])
+    v = Matrix([
+        [1., 0.],
+        [0., 1.]
+    ])
+    print(u.mul_mat(v).data)
+    # [[1.0, 0.0], [0.0, 1.0]]
+
+    u = Matrix([
+        [1., 0.],
+        [0., 1.]
+    ])
+    v = Matrix([
+        [2., 1.],
+        [4., 2.]
+    ])
+    print(u.mul_mat(v).data)
+    # [[2.0, 1.0], [4.0, 2.0]]
+
+    u = Matrix([
+        [3., -5.],
+        [6., 8.]
+    ])
+    v = Matrix([
+        [2., 1.],
+        [4., 2.]
+    ])
+    print(u.mul_mat(v).data)
+    # [[-14.0, -7.0], [44.0, 22.0]]

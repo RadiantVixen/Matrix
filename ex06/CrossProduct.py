@@ -1,5 +1,8 @@
 
-from ex00.AddSubtractScale import Vector
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from ex04.Norm import Vector
 
 
 def cross_product(u, v):
@@ -20,8 +23,17 @@ def cross_product(u, v):
 
 
 if __name__ == "__main__":
-    v1 = Vector([1, 2, 3])
-    v2 = Vector([4, 5, 6])
+    u = Vector([0., 0., 1.])
+    v = Vector([1., 0., 0.])
+    print(cross_product(u, v).data)
+    # [0.0, 1.0, 0.0]
 
-    result = cross_product(v1, v2)
-    print(result.data)  # Output: [-3, 6, -3]
+    u = Vector([1., 2., 3.])
+    v = Vector([4., 5., 6.])
+    print(cross_product(u, v).data)
+    # [-3.0, 6.0, -3.0]
+
+    u = Vector([4., 2., -3.])
+    v = Vector([-2., -5., 16.])
+    print(cross_product(u, v).data)
+    # [17.0, -58.0, -16.0]
