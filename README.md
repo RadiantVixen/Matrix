@@ -19,21 +19,21 @@ Below are the custom high-contrast technical visualizations showing the mathemat
 Linear interpolation (LERP) allows us to smoothly morph or transition between two points or vectors $\vec{u}$ and $\vec{v}$ in a linear path using a parameter $t \in [0, 1]$. This is implemented in `ex02/Lerp.py` and supports numbers, vectors, and matrices.
 
 <p align="center">
-  <img src="./vector-lerp.gif" width="480" alt="Vector Addition and LERP Animation"/>
+  <img src="./assets/vector-lerp.gif" width="480" alt="Vector Addition and LERP Animation"/>
 </p>
 
 ### 2. Linear Transformation (2D Shear & Scale)
 A linear transformation is a mapping between vector spaces that preserves vector addition and scalar multiplication. By applying a transformation matrix $M$ to standard basis vectors $\hat{i}$ and $\hat{j}$, we can transform the entire grid. This is implemented in `ex07/LinearMap.py` and visualizes the standard 3Blue1Brown "grid-morphing" effect.
 
 <p align="center">
-  <img src="./linear-transformation.gif" width="480" alt="2D Linear Transformation Grid Animation"/>
+  <img src="./assets/linear-transformation.gif" width="480" alt="2D Linear Transformation Grid Animation"/>
 </p>
 
 ### 3. Gauss-Jordan Elimination & Reduced Row Echelon Form (RREF)
 To solve systems of linear equations, compute matrix inverses, and determine the rank of a matrix, we use Gauss-Jordan elimination. This algorithm applies row operations step-by-step to transform an augmented matrix $[A | b]$ into its Reduced Row Echelon Form. This is implemented in `ex10/RowEchelonForm.py` and `ex12/Inverse.py`.
 
 <p align="center">
-  <img src="./gauss-jordan.gif" width="480" alt="Step-by-Step Gauss-Jordan Elimination Matrix Grid Animation"/>
+  <img src="./assets/gauss-jordan.gif" width="480" alt="Step-by-Step Gauss-Jordan Elimination Matrix Grid Animation"/>
 </p>
 
 ---
