@@ -11,7 +11,7 @@ This repository features custom high-fidelity visualizations explaining the core
 ### 1. Bitwise Full Adder Simulation (ex00)
 *Visualizing arithmetic addition synthesized purely from gate-level operations (AND, XOR, and bitwise Left Shifts), bypassing the arithmetic `+` operator.*
 
-![Bitwise Adder Simulation](https://github.com/RadiantVixen/assets/raw/main/bitwise-adder-simulation.gif)
+![Bitwise Adder Simulation](assets/bitwise-adder-simulation.gif)
 
 *   **XOR Gate (`^`)**: Computes the sum of bits without carries.
 *   **AND Gate (`&`)**: Identifies position-wise carry generators.
